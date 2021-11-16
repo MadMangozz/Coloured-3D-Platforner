@@ -23,6 +23,7 @@ public class CharacterController : MonoBehaviour
         cam = GameObject.Find("Main Camera");
         myRigidbody = GetComponent<Rigidbody>();
         isOnGround = true;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -39,6 +40,7 @@ public class CharacterController : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0.0f, rotation, 0.0f));
 
         camRotatation = camRotatation + Input.GetAxis("Mouse Y") * camRotationSpeed;
+        camRotatation = Mathf.Clamp(camRotationSpeed, -40.0f, 40.0f);
         cam.transform.localRotation = Quaternion.Euler(new Vector3(- camRotatation,0.0f, 0.0f));
 
         if (isOnGround == true && Input.GetKeyDown(KeyCode.Space))
